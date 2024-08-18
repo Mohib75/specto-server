@@ -64,16 +64,16 @@ async function run() {
 			res.clearCookie("token", { ...cookieOptions, maxAge: 0 }).send({ success: true })
 		})
 
-		// app.get("/products", async (req, res) => {
-		// 	const page = parseInt(req.query.page)
-		// 	const size = parseInt(req.query.size)
-		// 	const cursor = productCollection.find()
-		// 	const result = await cursor
-		// 		.skip(page * size)
-		// 		.limit(size)
-		// 		.toArray()
-		// 	res.send(result)
-		// })
+		app.get("/products", async (req, res) => {
+			const page = parseInt(req.query.page)
+			const size = parseInt(req.query.size)
+			const cursor = productCollection.find()
+			const result = await cursor
+				.skip(page * size)
+				.limit(size)
+				.toArray()
+			res.send(result)
+		})
 
 		// app.get("/productCount", async (req, res) => {
 		// 	const count = await productCollection.estimatedDocumentCount()
