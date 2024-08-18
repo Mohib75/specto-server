@@ -16,7 +16,7 @@ const cookieOptions = {
 // middleware
 app.use(
 	cors({
-		origin: ["http://localhost:5173", "https://specto-152e7.web.app/", "https://specto-152e7.firebaseapp.com/"],
+		origin: ["http://localhost:5173", "https://specto-152e7.web.app", "https://specto-152e7.firebaseapp.com"],
 		credentials: true,
 	})
 )
