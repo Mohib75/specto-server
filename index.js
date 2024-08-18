@@ -58,12 +58,14 @@ async function run() {
 			res.cookie("token", token, cookieOptions).send({ success: true })
 		})
 
+		// logout
 		app.post("/logout", async (req, res) => {
 			const user = req.body
 			console.log("logging out", user)
 			res.clearCookie("token", { ...cookieOptions, maxAge: 0 }).send({ success: true })
 		})
 
+		// getting all products
 		app.get("/products", async (req, res) => {
 			const page = parseInt(req.query.page)
 			const size = parseInt(req.query.size)
@@ -75,10 +77,11 @@ async function run() {
 			res.send(result)
 		})
 
-		// app.get("/productCount", async (req, res) => {
-		// 	const count = await productCollection.estimatedDocumentCount()
-		// 	res.send({ count })
-		// })
+		// getting total products
+		app.get("/productCount", async (req, res) => {
+			const count = await productCollection.estimatedDocumentCount()
+			res.send({ count })
+		})
 
 		// Send a ping to confirm a successful connection
 		// await client.db("admin").command({ ping: 1 })
