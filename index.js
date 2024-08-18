@@ -58,11 +58,11 @@ async function run() {
 			res.cookie("token", token, cookieOptions).send({ success: true })
 		})
 
-		// app.post("/logout", async (req, res) => {
-		// 	const user = req.body
-		// 	console.log("logging out", user)
-		// 	res.clearCookie("token", { ...cookieOptions, maxAge: 0 }).send({ success: true })
-		// })
+		app.post("/logout", async (req, res) => {
+			const user = req.body
+			console.log("logging out", user)
+			res.clearCookie("token", { ...cookieOptions, maxAge: 0 }).send({ success: true })
+		})
 
 		// app.get("/products", async (req, res) => {
 		// 	const page = parseInt(req.query.page)
