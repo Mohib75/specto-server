@@ -13,13 +13,13 @@ const cookieOptions = {
 	sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
 }
 
-// middleware
-app.use(
-	cors({
-		origin: ["http://localhost:5173", "https://specto-152e7.web.app/", "https://specto-152e7.firebaseapp.com/"],
-		credentials: true,
-	})
-)
+// // middleware
+// app.use(
+// 	cors({
+// 		origin: ["http://localhost:5173", "https://specto-152e7.web.app/", "https://specto-152e7.firebaseapp.com/"],
+// 		credentials: true,
+// 	})
+// )
 
 app.use(express.json())
 app.use(cookieParser())
@@ -36,10 +36,10 @@ const client = new MongoClient(uri, {
 })
 
 // middlewares
-const logger = (req, res, next) => {
-	console.log("log: info", req.method, req.url)
-	next()
-}
+// const logger = (req, res, next) => {
+// 	console.log("log: info", req.method, req.url)
+// 	next()
+// }
 
 async function run() {
 	try {
@@ -50,35 +50,35 @@ async function run() {
 
 		// auth related api
 		//creating Token
-		app.post("/jwt", logger, async (req, res) => {
-			const user = req.body
-			console.log("user for token", user)
-			const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
+		// app.post("/jwt", logger, async (req, res) => {
+		// 	const user = req.body
+		// 	console.log("user for token", user)
+		// 	const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
 
-			res.cookie("token", token, cookieOptions).send({ success: true })
-		})
+		// 	res.cookie("token", token, cookieOptions).send({ success: true })
+		// })
 
-		app.post("/logout", async (req, res) => {
-			const user = req.body
-			console.log("logging out", user)
-			res.clearCookie("token", { ...cookieOptions, maxAge: 0 }).send({ success: true })
-		})
+		// app.post("/logout", async (req, res) => {
+		// 	const user = req.body
+		// 	console.log("logging out", user)
+		// 	res.clearCookie("token", { ...cookieOptions, maxAge: 0 }).send({ success: true })
+		// })
 
-		app.get("/products", async (req, res) => {
-			const page = parseInt(req.query.page)
-			const size = parseInt(req.query.size)
-			const cursor = productCollection.find()
-			const result = await cursor
-				.skip(page * size)
-				.limit(size)
-				.toArray()
-			res.send(result)
-		})
+		// app.get("/products", async (req, res) => {
+		// 	const page = parseInt(req.query.page)
+		// 	const size = parseInt(req.query.size)
+		// 	const cursor = productCollection.find()
+		// 	const result = await cursor
+		// 		.skip(page * size)
+		// 		.limit(size)
+		// 		.toArray()
+		// 	res.send(result)
+		// })
 
-		app.get("/productCount", async (req, res) => {
-			const count = await productCollection.estimatedDocumentCount()
-			res.send({ count })
-		})
+		// app.get("/productCount", async (req, res) => {
+		// 	const count = await productCollection.estimatedDocumentCount()
+		// 	res.send({ count })
+		// })
 
 		// Send a ping to confirm a successful connection
 		// await client.db("admin").command({ ping: 1 })
