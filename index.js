@@ -13,13 +13,13 @@ const cookieOptions = {
 	sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
 }
 
-// // middleware
-// app.use(
-// 	cors({
-// 		origin: ["http://localhost:5173", "https://specto-152e7.web.app/", "https://specto-152e7.firebaseapp.com/"],
-// 		credentials: true,
-// 	})
-// )
+// middleware
+app.use(
+	cors({
+		origin: ["http://localhost:5173", "https://specto-152e7.web.app/", "https://specto-152e7.firebaseapp.com/"],
+		credentials: true,
+	})
+)
 
 app.use(express.json())
 app.use(cookieParser())
